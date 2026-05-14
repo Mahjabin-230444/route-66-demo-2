@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Route 66 Interactive Planner</title>
+
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+  />
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+
+  <nav class="stage-nav">
+    <button onclick="switchStage(1)">1. Illinois</button>
+    <button onclick="switchStage(2)">2. Missouri</button>
+    <button onclick="switchStage(3)">3. Kansas</button>
+    <button onclick="switchStage(4)">4. Oklahoma</button>
+    <button onclick="switchStage(5)">5. Texas</button>
+    <button onclick="switchStage(6)">6. New Mexico</button>
+    <button onclick="switchStage(7)">7. Arizona</button>
+    <button onclick="switchStage(8)">8. California</button>
+  </nav>
+
+  <div class="main-container">
+
+    <aside id="info-panel" class="info-panel">
+      <div class="panel-header">
+        <h2 id="stage-title">Illinois — Places</h2>
+        <p class="panel-subtitle">Click any place to zoom on the map.</p>
+      </div>
+
+      <div id="places-list" class="places-list"></div>
+    </aside>
+
+    <main class="map-wrapper">
+
+      <div class="map-controls">
+
+        <div class="control-block">
+          <label for="basemap-select">Basemap</label>
+          <select id="basemap-select" onchange="changeBasemap(this.value)">
+            <option value="carto">Carto Light</option>
+            <option value="osm">OpenStreetMap</option>
+            <option value="satellite">Satellite</option>
+            <option value="google">Google Map</option>
+          </select>
+        </div>
+
+        <div class="control-block">
+          <label for="interval-select">Progress Update</label>
+          <select id="interval-select" onchange="changeProgressInterval(this.value)">
+            <option value="1">Every 1 minute</option>
+            <option value="3">Every 3 minutes</option>
+            <option value="6">Every 6 minutes</option>
+            <option value="10">Every 10 minutes</option>
+          </select>
+        </div>
+
+        <button class="location-btn" onclick="zoomToCurrentLocation()">
+          Zoom to My Location
+        </button>
+
+      </div>
+
+      <div id="map"></div>
+
+      <div class="legend">
+        <h4>Legend</h4>
+        <div><span class="dot fuel"></span> Fuel</div>
+        <div><span class="dot food"></span> Food</div>
+        <div><span class="dot lodging"></span> Lodging</div>
+        <div><span class="dot attraction"></span> Attraction</div>
+        <div><span class="dot stop"></span> Stop / Place</div>
+        <hr />
+        <div><span class="line route"></span> Route 66</div>
+      </div>
+
+    </main>
+
+  </div>
+
+  <div class="progress-container">
+    <div class="progress-labels">
+      <span id="route-start-label">Start</span>
+      <span id="mid-stop">Midpoint</span>
+      <span id="route-end-label">End</span>
+    </div>
+
+    <div class="progress-bg">
+      <div id="user-progress" class="progress-fill"></div>
+      <div id="user-marker" class="user-dot"></div>
+    </div>
+
+    <div id="progress-status" class="progress-status">
+      Waiting for location...
+    </div>
+  </div>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+  <script src="data.js"></script>
+  <script src="script.js"></script>
+
+</body>
+</html>
